@@ -19,7 +19,10 @@ kdf = PBKDF2HMAC(
 key = base64.urlsafe_b64encode(kdf.derive(password))
 f=Fernet(key)
 print("\nEncrypted text you've received :\n\n"+msg)
-msg=msg[2:-1]
-msg=bytes(msg,'utf-8')
-msg=f.decrypt(msg)
-print("\nThe Message sent was: \n\n"+str(msg)[2:-1])
+try:
+	msg=msg[2:-1]
+	msg=bytes(msg,'utf-8')
+	msg=f.decrypt(msg)
+	print("\nThe Message sent was: \n\n"+str(msg)[2:-1])
+except:
+	print("\nWrong key can't display msg\n")
